@@ -24,14 +24,36 @@
                     const map = new BMap.Map(document.createElement('div'));
 
                     navigator.geolocation.getCurrentPosition(position => {
-                        const mPoint = new BMap.Point(position.coords.longitude, position.coords.latitude);
+                        const ggPoint = new BMap.Point(position.coords.longitude, position.coords.latitude);
+                        const convertor = new BMap.Convertor();
+                        convertor.translate([ggPoint], 1, 5, data => {
+                            if (data.status === 0) {
+                                const bdPoint = data.points[0]
 
-                        var myGeo = new BMap.Geocoder();
-                        myGeo.getLocation(mPoint, function(result){
-                            if (result){
-                                alert(result.address);
+                                var myGeo = new BMap.Geocoder();
+                                myGeo.getLocation(bdPoint, function(result){
+                                    if (result){
+                                        alert(result.address);
+                                    }
+                                });
+
+                                // const map = new BMap.Map(document.createElement('div'));
+                                //
+                                // map.centerAndZoom(bdPoint, 19);
+                                // const options = {
+                                //     onSearchComplete: function (results) {
+                                //         if (local.getStatus() === BMAP_STATUS_SUCCESS) {
+                                //             return resolve(results.getPoi(0).title)
+                                //         }
+                                //     },
+                                //     pageCapacity: 1 // 只取第一个结果
+                                // };
+                                // const local = new BMap.LocalSearch(map, options);
+                                // local.search("医院");
+                                // console.log(postion);
                             }
-                        });
+                        })
+
                     },error => {
                         console.log(error);
                     })
