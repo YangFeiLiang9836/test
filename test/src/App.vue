@@ -39,7 +39,7 @@
                                     pageCapacity: 1 // 只取第一个结果
                                 };
                                 const local = new BMap.LocalSearch(map, options);
-                                local.searchNearby('医院',mPoint, 500);
+                                local.searchNearby('医院',mPoint, 1000);
                             }
                         })
 
