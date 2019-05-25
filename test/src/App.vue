@@ -32,6 +32,7 @@
                                 const options = {
                                     onSearchComplete: function (results) {
                                         if (local.getStatus() === BMAP_STATUS_SUCCESS) {
+                                            alert(results.getPoi(0).title)
                                             return resolve(results.getPoi(0).title)
                                         }
                                     },
