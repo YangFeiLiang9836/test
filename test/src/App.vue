@@ -24,11 +24,11 @@
                         const convertor = new BMap.Convertor();
                         convertor.translate([ggPoint], 1, 5, data => {
                             if (data.status === 0) {
-                                const bdPoint = data.points[0]
+                                const mPoint = data.points[0]
 
                                 const map = new BMap.Map(document.createElement('div'));
 
-                                map.centerAndZoom(bdPoint, 19);
+                                map.centerAndZoom(mPoint, 19);
                                 const options = {
                                     onSearchComplete: function (results) {
                                         if (local.getStatus() === BMAP_STATUS_SUCCESS) {
@@ -39,7 +39,7 @@
                                     pageCapacity: 1 // 只取第一个结果
                                 };
                                 const local = new BMap.LocalSearch(map, options);
-                                local.search("医院");
+                                local.searchNearby('医院',mPoint, 500);
                             }
                         })
 
